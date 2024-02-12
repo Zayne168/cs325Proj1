@@ -1,10 +1,16 @@
 import requests
-from bs4 import BeautifulSoup                               #import scrapper
-with open('urls.txt', 'r') as file:                         #take in file with list of URLS
-    urls=file.readlines()                                   #goes line by line reading the file(reading the urls)
-for idx, url in enumerate(urls):                            #for #of lines in url(.txt), loop through the number of lines used (enumerate would say "5")
-    response=requests.get(url.strip())                      
-    soup=BeautifulSoup(response.content, 'html.parser')     #Beautiful soup does its thang
+from bs4 import BeautifulSoup
+with open('urls.txt', 'r') as file:
+    urls = file.readlines()
+for idx, url in enumerate(urls):
+    response = requests.get(url.strip())
+    soup = BeautifulSoup(response.content, 'html.parser')
 
-    with open(f'output_{idx}.txt', 'w') as output_file:     #write to output files like a G
-        output_file.write(soup.get_text())
+    try:
+        content = soup.find('article').get_text()
+    except AttributeError:
+        print(f"Could not find article content in {url}")
+        content = "No content available"
+
+    with open(f'output_{idx}.txt', 'w') as output_file:
+        output_file.write(content)
