@@ -7,10 +7,13 @@ for idx, url in enumerate(urls):
     soup = BeautifulSoup(response.content, 'html.parser')
 
     try:
-        content = soup.find('article').get_text()
-    except AttributeError:
-        print(f"Could not find article content in {url}")
-        content = "No content available"
+        title = soup.find('title').get_text()
+        synopsis = soup.find('meta', attrs={'name': 'description'})['content']
+    except (AttributeError, KeyError):
+        print(f"Could not find title or synopsis in {url}")
+        title = "No title available"
+        synopsis = "No synopsis available"
 
     with open(f'output_{idx}.txt', 'w') as output_file:
-        output_file.write(content)
+        output_file.write(f"Title: {title}\nSynopsis: {synopsis}")
+
