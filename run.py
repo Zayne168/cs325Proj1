@@ -4,9 +4,10 @@ import module_2.scrapper
 
 #Zayne Bonner
 #800756759
+#this code functions the same as project 1, edit the urls.txt to utilize just like proj1.
 #This is the run.py file for my Project
 #in the main I call the verify function from my verification module
-#I then copy the verified array from the module and pass it into the scrapper
+#I then copy the verified array from the module and pass it into the scrapper functions
 #the init files declare each module folder an actual module. I had troubles without them. no comments necessary on them.
 #
 #The SOLID principle utilized here is the Single Responsibility Principle
